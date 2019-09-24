@@ -27,6 +27,8 @@ Documentation externe
 - https://openclassrooms.com/fr/courses/2342361-gerez-votre-code-avec-git-et-github
 - https://openclassrooms.com/fr/courses/5671626-manage-your-code-project-with-git-github 
 - https://help.github.com/en/articles/basic-writing-and-formatting-syntax
+- [Git Team Workflow Cheatsheet](https://jameschambers.co/writing/git-team-workflow-cheatsheet/)
+- [Pro Git 2nd Edition](https://git-scm.com/book/en/v2/)
 
 ## Rest :
 
