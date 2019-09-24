@@ -31,3 +31,8 @@ Documentation externe
 ## Rest :
 
 - https://openclassrooms.com/fr/courses/6121936-build-your-web-projects-with-rest-apis
+
+## Repositories externes (sources d'exemples):
+
+- [Projet Intégration 2018 - MusicPlay Web Services](https://github.com/iepscf-namur/musicplay-ws)
+- [Projet Intégration 2018 - MusicPlay Front](https://github.com/iepscf-namur/musicplay-ctv)
