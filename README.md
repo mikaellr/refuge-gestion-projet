@@ -9,6 +9,8 @@ Documents du projet :
 - [Initialisation](https://docs.google.com/document/d/1gBDud3LpvzIHUw8_HQIu0eaOinJnq9tQKl2_UpnjVsE/edit) (but, consignes, choix technos, rôles, propositions de sujets, adresses email...)
 - [Project Charter](https://docs.google.com/document/d/1-eo4aM_2slbmf-zPa_YHkvIrGOf8dDrlKQDj2gGk1Bk/edit)
 - [WBS backlog](https://docs.google.com/spreadsheets/d/1xcJTQHaBiujmIFJoVDBjfTPv6cw6zPeTq2JODcNpshU/edit?usp=sharing)
+- [Minutes](https://github.com/PID-2019-Refuge/refuge-gestion-projet/tree/master/minutes)
+- [Diagrammes d'architecture](https://github.com/PID-2019-Refuge/refuge-gestion-projet/tree/master/architecture)
 
 
 
