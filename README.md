@@ -37,26 +37,13 @@ Guides :
 - https://help.github.com/en/articles/ignoring-files
 - https://www.atlassian.com/git/tutorials/saving-changes/gitignore#git-ignore-patterns (guide patterns d'exclusion)
 
-Références utiles pour projets Java :
+Fichiers .gitignore de référence :
 - https://github.com/github/gitignore
-- https://github.com/github/gitignore/blob/master/Java.gitignore !
-- https://github.com/github/gitignore/blob/master/Maven.gitignore  !
-- https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore !
-- https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore !
-- https://github.com/github/gitignore/blob/master/Global/JDeveloper.gitignore
-- https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore !
-- https://github.com/github/gitignore/blob/master/Global/Linux.gitignore !
-- https://github.com/github/gitignore/blob/master/Global/macOS.gitignore !
-- https://github.com/github/gitignore/blob/master/Global/Windows.gitignore !
-- https://github.com/github/gitignore/blob/master/Global/Backup.gitignore !
-- https://github.com/github/gitignore/blob/master/JBoss.gitignore
-- https://github.com/github/gitignore/blob/master/Sass.gitignore
-- https://github.com/github/gitignore/blob/master/Global/Diff.gitignore
-- https://github.com/github/gitignore/blob/master/Global/Emacs.gitignore
-- https://github.com/github/gitignore/blob/master/Global/GPG.gitignore
-- https://github.com/github/gitignore/blob/master/Global/Images.gitignore
-- https://github.com/github/gitignore/blob/master/Global/Vim.gitignore
 - https://gist.github.com/octocat/9257657
+
+### IntelliJ/Eclipse coexistence :
+- https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+- https://wiki.eclipse.org/FAQ_How_do_I_set_up_a_Java_project_to_share_in_a_repository%3F
 
 ## Rest :
 
