@@ -2,87 +2,114 @@ CREATE DATABASE IF NOT EXISTS `refuge`;
 
 USE `refuge`;
 
-DROP TABLE IF EXISTS `refuge_contact_requests`;
-DROP TABLE IF EXISTS `refuge_animals`;
-DROP TABLE IF EXISTS `refuge_races`;
-DROP TABLE IF EXISTS `refuge_species`;
-DROP TABLE IF EXISTS `refuge_colors`;
-DROP TABLE IF EXISTS `refuge_users`;
-DROP TABLE IF EXISTS `refuge_roles`;
+DROP TABLE IF EXISTS `contact_requests`;
+DROP TABLE IF EXISTS `animals`;
+DROP TABLE IF EXISTS `races`;
+DROP TABLE IF EXISTS `species`;
+DROP TABLE IF EXISTS `colors`;
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `roles`;
 
-CREATE TABLE `refuge_roles` (
-  `id` INT UNSIGNED NOT NULL PRIMARY KEY,
-  `name` VARCHAR(255) NOT NULL,
-  `description` VARCHAR(255) NOT NULL
+CREATE TABLE `roles` (
+  `id` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `uk__roles__name` UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `refuge_users` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `users` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(100) NOT NULL,
   `last_name` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(100) UNIQUE NOT NULL,
-  `phone` VARCHAR(255) DEFAULT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(40) DEFAULT NULL,
   `hash` VARCHAR(255) NOT NULL,
   `salt` VARCHAR(255) NOT NULL,
   `fk_role` INT UNSIGNED NOT NULL,
-  KEY `FKpemcxfh7pbce60kt5ew67vr8` (`fk_role`),
-  CONSTRAINT `FKpemcxfh7pbce60kt5ew67vr8` FOREIGN KEY (`fk_role`) REFERENCES `refuge_roles` (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `uk__users__email` UNIQUE KEY (`email`),
+  CONSTRAINT `fk__users__fk_role` FOREIGN KEY (`fk_role`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
-CREATE TABLE `refuge_species` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(100) UNIQUE NOT NULL
+CREATE TABLE `species` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `uk__species__name` UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `refuge_races` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(55) DEFAULT NULL,
+CREATE TABLE `races` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) DEFAULT NULL,
   `fk_species` INT UNSIGNED NOT NULL,
-  UNIQUE(`name`, `fk_species`),
-  KEY `FKbt7rljikniuv7nhpan9hq7yl0` (`fk_species`),
-  CONSTRAINT `FKbt7rljikniuv7nhpan9hq7yl0` FOREIGN KEY (`fk_species`) REFERENCES `refuge_species` (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `uk__races__name__fk_species` UNIQUE KEY (`name`, `fk_species`),
+  CONSTRAINT `fk__races__fk_species` FOREIGN KEY (`fk_species`) REFERENCES `species` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `refuge_colors` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(255) NOT NULL
+CREATE TABLE `colors` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `uk__colors__name` UNIQUE KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
-CREATE TABLE `refuge_animals` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `animals` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) DEFAULT NULL,
   `description` VARCHAR(255) DEFAULT NULL,
-  `birthYear` INT UNSIGNED DEFAULT NULL,
+  `birth_year` INT UNSIGNED DEFAULT NULL,
   `sex` CHAR(1) NOT NULL,
   `sterilized` BOOLEAN NOT NULL,
   `adoptable` BOOLEAN NOT NULL,
-  `photo` MEDIUMBLOB DEFAULT NULL,
-  `photoContentType` VARCHAR(255) DEFAULT NULL,
-  `photoContentLength` INT UNSIGNED DEFAULT NULL,
+  `photo_content` MEDIUMBLOB DEFAULT NULL,
+  `photo_content_type` VARCHAR(255) DEFAULT NULL,
+  `photo_content_length` INT UNSIGNED DEFAULT NULL,
   `fk_species` INT UNSIGNED NOT NULL,
   `fk_race` INT UNSIGNED DEFAULT NULL,
   `fk_color` INT UNSIGNED DEFAULT NULL,
-  KEY `FK86gmxk28fbbvlhwimehul9r5k` (`fk_color`),
-  KEY `FKdbi5sacy1cpgcy3tdw8ii3vwg` (`fk_race`),
-  KEY `FKanmoe18quwvrg4epx9skjk6sg` (`fk_species`),
-  CONSTRAINT `FK86gmxk28fbbvlhwimehul9r5k` FOREIGN KEY (`fk_color`) REFERENCES `refuge_colors` (`id`),
-  CONSTRAINT `FKanmoe18quwvrg4epx9skjk6sg` FOREIGN KEY (`fk_species`) REFERENCES `refuge_species` (`id`),
-  CONSTRAINT `FKdbi5sacy1cpgcy3tdw8ii3vwg` FOREIGN KEY (`fk_race`) REFERENCES `refuge_races` (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk__animals__fk_color` FOREIGN KEY (`fk_color`) REFERENCES `colors` (`id`),
+  CONSTRAINT `fk__animals__fk_species` FOREIGN KEY (`fk_species`) REFERENCES `species` (`id`),
+  CONSTRAINT `fk__animals__fk_race` FOREIGN KEY (`fk_race`) REFERENCES `races` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `refuge_contact_requests` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `firstName` VARCHAR(255) DEFAULT NULL,
-  `lastName` VARCHAR(255) DEFAULT NULL,
+CREATE TABLE `contact_requests` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(255) DEFAULT NULL,
+  `last_name` VARCHAR(255) DEFAULT NULL,
   `email` VARCHAR(255) DEFAULT NULL,
   `phone` VARCHAR(255) DEFAULT NULL,
   `message` VARCHAR(255) DEFAULT NULL,
   `date` DATETIME(6) NOT NULL,
   `treated` BOOLEAN NOT NULL,
-  `fk_species` INT UNSIGNED NOT NULL,
-  KEY `FK1g38erxr6m54g5r8argdubkxg` (`fk_species`),
-  CONSTRAINT `FK1g38erxr6m54g5r8argdubkxg` FOREIGN KEY (`fk_species`) REFERENCES `refuge_animals` (`id`)
+  `fk_animal` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk__contact_requests__fk_species` FOREIGN KEY (`fk_animal`) REFERENCES `animals` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+CREATE OR REPLACE VIEW v_animals AS SELECT 
+    an.id AS id, an.name AS name, an.description, an.birth_year, an.sex, an.sterilized, an.adoptable, an.photo_content_type, an.photo_content_length, 
+    sp.name AS species_name,
+    ra.name AS race_name,
+    co.name AS color_name,
+    COUNT(cr.message) AS contact_requests_number
+    FROM animals AS an
+    LEFT OUTER JOIN species AS sp ON an.fk_species=sp.id
+    LEFT OUTER JOIN races AS ra ON an.fk_race=ra.id
+    LEFT OUTER JOIN colors AS co ON an.fk_color=co.id
+    LEFT OUTER JOIN contact_requests AS cr ON an.id=cr.fk_animal
+    GROUP BY an.id
+    ;
+    
+CREATE OR REPLACE VIEW v_users AS SELECT 
+    us.id AS id, us.first_name, us.last_name, us.email, us.phone, us.salt, us.hash, 
+    ro.name AS role_name
+    FROM users AS us LEFT OUTER JOIN roles AS ro ON us.fk_role=ro.id;
+    
+    
+
