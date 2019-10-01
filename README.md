@@ -11,8 +11,7 @@ Documents du projet :
 - [WBS backlog](https://docs.google.com/spreadsheets/d/1xcJTQHaBiujmIFJoVDBjfTPv6cw6zPeTq2JODcNpshU/edit?usp=sharing)
 - [Minutes](https://github.com/PID-2019-Refuge/refuge-gestion-projet/tree/master/minutes)
 - [Diagrammes d'architecture](https://github.com/PID-2019-Refuge/refuge-gestion-projet/tree/master/architecture)
-
-
+- [User Stories](https://docs.google.com/document/d/1BqkM7wtp0YOO9krh8iRbteRxV0Xlvye03hJlL0XGbUY/edit?usp=sharing)
 
 
 Documentation externe
