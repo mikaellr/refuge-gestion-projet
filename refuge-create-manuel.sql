@@ -26,6 +26,7 @@ CREATE TABLE `users` (
   `phone` VARCHAR(40) DEFAULT NULL,
   `hash` VARCHAR(255) NOT NULL,
   `salt` VARCHAR(255) NOT NULL,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   `fk_role` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `uk__users__email` UNIQUE KEY (`email`),
@@ -107,7 +108,7 @@ CREATE OR REPLACE VIEW v_animals AS SELECT
     ;
     
 CREATE OR REPLACE VIEW v_users AS SELECT 
-    us.id AS id, us.first_name, us.last_name, us.email, us.phone, us.salt, us.hash, 
+    us.id AS id, us.first_name, us.last_name, us.email, us.phone, us.salt, us.hash, us.active,
     ro.name AS role_name
     FROM users AS us LEFT OUTER JOIN roles AS ro ON us.fk_role=ro.id;
     

@@ -110,7 +110,7 @@ CREATE TABLE `contact_requests` (
 
 LOCK TABLES `contact_requests` WRITE;
 /*!40000 ALTER TABLE `contact_requests` DISABLE KEYS */;
-INSERT INTO `contact_requests` VALUES (1,'MC','Solaar','mc.solaar@gmail.com',NULL,'Je suis l\'as de trèfle qui pique son cœur.','2019-10-01 14:32:26.092000',0,21),(2,'Neil','Diamond','neil.diamond@gmail.com',NULL,'Sweet Caroline, Good times never seemed so good','2019-10-01 14:32:26.128000',0,21),(3,'Sophie','Durant','sophie.durant@gmail.com',NULL,'Elle est à moi.','2019-10-01 14:32:26.159000',0,21),(4,'Roger','Dupont','roger.dupont@hotmail.com','082/457812','Je suis très intéressé par ce poisson rouge.','2019-10-01 14:32:26.601000',0,25),(5,'Sophie','Durant','sophie.durant@gmail.com',NULL,'Quel merveilleux poisson rouge ! Contactez moi de toute urgence.','2019-10-01 14:32:26.635000',0,25),(6,'Jean','Aymard','jean_aymard@gmail.com',NULL,'Bubulle ! Bubulle !','2019-10-01 14:32:26.668000',0,25);
+INSERT INTO `contact_requests` VALUES (1,'MC','Solaar','mc.solaar@gmail.com',NULL,'Je suis l\'as de trèfle qui pique son cœur.','2019-10-01 22:10:53.300000',0,21),(2,'Neil','Diamond','neil.diamond@gmail.com',NULL,'Sweet Caroline, Good times never seemed so good','2019-10-01 22:10:53.336000',0,21),(3,'Sophie','Durant','sophie.durant@gmail.com',NULL,'Elle est à moi.','2019-10-01 22:10:53.366000',0,21),(4,'Roger','Dupont','roger.dupont@hotmail.com','082/457812','Je suis très intéressé par ce poisson rouge.','2019-10-01 22:10:53.692000',0,25),(5,'Sophie','Durant','sophie.durant@gmail.com',NULL,'Quel merveilleux poisson rouge ! Contactez moi de toute urgence.','2019-10-01 22:10:53.725000',0,25),(6,'Jean','Aymard','jean_aymard@gmail.com',NULL,'Bubulle ! Bubulle !','2019-10-01 22:10:53.767000',0,25);
 /*!40000 ALTER TABLE `contact_requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,12 +208,13 @@ CREATE TABLE `users` (
   `phone` varchar(40) DEFAULT NULL,
   `hash` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   `fk_role` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk__users__email` (`email`),
   KEY `fk__users__fk_role` (`fk_role`),
   CONSTRAINT `fk__users__fk_role` FOREIGN KEY (`fk_role`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +223,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Léon','Dupont','leon.dupont@gmail.com','081/451256','*6190266b3356a5e16682b09596bbd39e9ee9f832ee375d348ad5cd630af6a4a0*','qwrngpxyzzqjmxsjahtfgmulnelhmxpgpjxadmnayhfxwdyibhhevcwznibiruucnctkiobvnwxzqtgbusinegkipmtetmrcfjwrmsttnjezbhnrfbvdawgabaffubzedgkoadqkgzhnyaeyzhrtshujievokeybnocnjbodebpeiwknudwicmnmizngwkudmdmgrjdausemtgiacjesimbesjipufodxrjyejlkmascxrcdnuxfcqbdfethwef',1),(2,'Jules','Vanhamme','jules.vanhamme@hotmail.com','081/745621','*c8cb8d6efeb8b1d27a7a845d3f967f4b179248ee55de08d628c18a252ad9efcc*','wbwyitqxrvhsaiqyvydqiqrwkclcxpsbgqfditcbnjnbijwsihplxxnvrisnflkghjiluldpmceqjjdtmrwbsyebhhyakegbmwlynmsdoixkkstyktypiuxqikfhmiofvibrnekwkkxaymsxqrjnznpicetbvlzrloadpvnsjshcflxpeyogfdpybmbyqgaltepgikhsryhfvpvfxxgqjzasdcsiilbgjxditzrvuszuxrahorxjtmvgnhspghv',1),(3,'Antoinette','Spaak','antoinette.spaak@gmail.com',NULL,'*2f49667b1d610cf285c47cd5e0b7429d5961ab1c4aaa88b34bc3eb66356e3d6b*','azloaxmjudmpzthnmpgcpvtkeimcgdenhmqboejwmncxwqcdtyslikhozrelhsjzgkxqtbvfxnfyyltcyjensrlwwlhfxcrrkkiojjdrbjwsicdrlarqattnkpgujnuaraaafsgpzjhklwxdfpkvxlsiovfynunfymfslgptkecuooddtmtxzohtwamrpmvqmfrjisaceeunurcdqdqiqglchjmeqzibixkryiebhmvkoaajcjuhwvjutfqffke',1);
+INSERT INTO `users` VALUES (1,'Léon','Dupont','leon.dupont@gmail.com','081/451256','*467aa03ce258299db8fe03acc6003af026d9dd8dd8a72c2d99976317c6252e19*','qwxbmiltiqqudqbfmlttttdiyctzzjsvfnxfednnrlzdhxpoqskpjypmjapkkwtchfmttzxkkyggmopxtvbzmmabzieonwxdixtbcdlrzizhftkcgybephyurvvaljrzofsfapqceooranqspcoqywlbqdoykapybmixqieajjjisijmtzyqwtrugybzwakvtflmtoqvocctwpdmpqsxjrjouxxygjaafgwdoudkgfeimekzgjtucuyqvhuqpbi',1,1),(2,'Jules','Vanhamme','jules.vanhamme@hotmail.com','081/745621','*9816ba00b694579deb1be0c53f32b5db0654bd3f9d678fae4b653850963d3891*','fpozavdutqwwxtjsnwwayspjhhxgpeazcmyiouwolgjmiokvyujguxjqstvrqxevjopupqgbkwmygnfddoyjjwkoiinwlviegmdimqwbjirqgifixqokqmtwusopyglbdbrtupjqhxwzrzvddqggigphiffczuahbxmqqcafebnrjganoxybrqgwznbhmzllgevayxtlmwbrgxzljxercqjkfoahiqhgkblbshmazjphmshuvugykulcnpbkzlr',1,1),(3,'Antoinette','Spaak','antoinette.spaak@gmail.com',NULL,'*61415163a1ff080c2388985b6f3ae38f1e0a29eb182a06db2bb7212ee8c3a23b*','tuuzfwhrkldarinsxilusfmxuxkfljczelstoepvjpkwxhciyoafngnbsluvpqyjwhkbbjzrzvlmidqszthzfuvzkhuuybqivxctkdhybpbtziounpymuohcwwxvnurwulayifaterbbsjpclflgrhvxaznpprkbaodxbcoeolbqvtkovibqzkcjcgzuntupqcsughlckqtzkzdwdaqdaacajcpboxzxjczbxaoktwmosvtrazztscrtrzkifqa',1,1),(4,'Jacques','Shiraz','jacques.shiraz@gmail.com',NULL,'*671f1e5f89093b0b3d8f2623881bd91139c2e171bcf38afb9395011d26e0c102*','yeggbfabdquuzgiaslrysoiuqreqgdxazdbveqielbaylfvlghaqkxylspgspzighcsazlqkitlpdtykxdmlcbuwalfvxsyaibkwpcgnvrhqfkdkedymlbydkuzoqstwcqojuqfhrxflqnsejmehxpoucgaphwlatybgmdqhitbcpuelskgccodolwmwgmcxmdikktviusmaejlltqbtdknwdjwtfiwbslpejaephrhzgtphqzaqaenwgkhuuil',0,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,6 +268,7 @@ SET character_set_client = utf8;
   `phone` tinyint NOT NULL,
   `salt` tinyint NOT NULL,
   `hash` tinyint NOT NULL,
+  `active` tinyint NOT NULL,
   `role_name` tinyint NOT NULL
 ) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
@@ -304,7 +306,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`refuge`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `v_users` AS select `us`.`id` AS `id`,`us`.`first_name` AS `first_name`,`us`.`last_name` AS `last_name`,`us`.`email` AS `email`,`us`.`phone` AS `phone`,`us`.`salt` AS `salt`,`us`.`hash` AS `hash`,`ro`.`name` AS `role_name` from (`users` `us` left join `roles` `ro` on((`us`.`fk_role` = `ro`.`id`))) */;
+/*!50001 VIEW `v_users` AS select `us`.`id` AS `id`,`us`.`first_name` AS `first_name`,`us`.`last_name` AS `last_name`,`us`.`email` AS `email`,`us`.`phone` AS `phone`,`us`.`salt` AS `salt`,`us`.`hash` AS `hash`,`us`.`active` AS `active`,`ro`.`name` AS `role_name` from (`users` `us` left join `roles` `ro` on((`us`.`fk_role` = `ro`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -318,4 +320,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-01 14:48:49
+-- Dump completed on 2019-10-01 22:14:23
