@@ -5,13 +5,16 @@ Centralisation des documents de gestion du projet
 
 Documents du projet :
 =====================
+(Postez ici vos liens vers les documents externes (google doc...) en éditant ce fichier README.md au lieu de créer inutilement une page par document, svp)
 
-- [Initialisation](https://docs.google.com/document/d/1gBDud3LpvzIHUw8_HQIu0eaOinJnq9tQKl2_UpnjVsE/edit) (but, consignes, choix technos, rôles, propositions de sujets, adresses email...)
+- [Initialisation](https://docs.google.com/document/d/1gBDud3LpvzIHUw8_HQIu0eaOinJnq9tQKl2_UpnjVsE/edit) (but, consignes, choix technos, rôles, propositions de sujets)
 - [Project Charter](https://docs.google.com/document/d/1-eo4aM_2slbmf-zPa_YHkvIrGOf8dDrlKQDj2gGk1Bk/edit)
 - [WBS backlog](https://docs.google.com/spreadsheets/d/1xcJTQHaBiujmIFJoVDBjfTPv6cw6zPeTq2JODcNpshU/edit?usp=sharing)
 - [Minutes](https://github.com/PID-2019-Refuge/refuge-gestion-projet/tree/master/minutes)
 - [Diagrammes d'architecture](https://github.com/PID-2019-Refuge/refuge-gestion-projet/tree/master/architecture)
 - [User Stories](https://docs.google.com/document/d/1BqkM7wtp0YOO9krh8iRbteRxV0Xlvye03hJlL0XGbUY/edit?usp=sharing)
+- [Architecture Diagram](https://docs.google.com/presentation/d/1x-C_dEIZAp0FltLLUbiz0otqm-aufp0Jgs69p8wCAr0/edit?usp=sharing)
+
 
 
 Documentation externe
