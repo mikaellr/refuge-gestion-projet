@@ -26,12 +26,25 @@ Documentation externe
 - https://cdn.discordapp.com/attachments/535153424594108429/623559743390220316/pm2.en.pdf
 - http://www.houseofhunt.com/wp-content/uploads/2016/06/SMART-Goals.jpg (SMART)
 
+
+## Git Workflow :
+
+2 articles en français (très similaires) sur deux principales façon de travailler : "git flow" (+solide, +complexe) et "github flow" (+simple) :
+- https://www.nicoespeon.com/fr/2013/08/quel-git-workflow-pour-mon-projet/ 
+- https://medium.com/@OVHUXLabs/la-puissance-des-workflows-git-12e195cafe44
+
+Les 2 articles en anglais sur lesquels ils sont basés :
+- https://nvie.com/posts/a-successful-git-branching-model/ (article de référence sur le "git flow")
+- http://scottchacon.com/2011/08/31/github-flow.html (article de référence sur le "github flow")
+
+Autres liens :
+- [Git Team Workflow Cheatsheet](https://jameschambers.co/writing/git-team-workflow-cheatsheet/) (à relativer en fonction de ce qui précède : en "git flow", la "feature branch" est à créer depuis la "develop" branch, pas depuis la "master" branch)
+
 ## Git/GitHub :
 
 - https://openclassrooms.com/fr/courses/2342361-gerez-votre-code-avec-git-et-github
 - https://openclassrooms.com/fr/courses/5671626-manage-your-code-project-with-git-github 
 - https://help.github.com/en/articles/basic-writing-and-formatting-syntax
-- [Git Team Workflow Cheatsheet](https://jameschambers.co/writing/git-team-workflow-cheatsheet/)
 - [Pro Git 2nd Edition](https://git-scm.com/book/en/v2/)
 
 ### .gitignore :
