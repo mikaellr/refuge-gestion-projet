@@ -1,0 +1,256 @@
+/ à la bases des urls = http://localhost:8080/refuge/
+/ à la bases des jsps = refuge/src/main/webapp/WEB_INF/jsp/
+
+Remarques : 
+- (?) à fixer 
+- employer systématiquement <c:url value=""/> pour les urls internes au site dans les jsp
+- utiliser webjars pour charger bootstrap et jquery (?)
+- utiliser include-prelude/include-coda dans le web.xml pour la mise en page (?)
+
+
+
+Partie publique / visiteurs :
+=============================
+
+/ 
+be.iepscf.refuge.business.servlet.IndexServlet
+    doGet       page d'accueil
+                - formulaire de recherche d'animaux (method=get, action=/animals)
+                - Javascript (Ajax, jQuery) : event listener dans formulaire de recherche : détecter changement dans bouton select de l'espèce, charger les races en réaction)
+                jsp : /index.jsp
+
+
+Recherche et visualisation animaux :
+------------------------------------
+                
+/animals?[species=<species-id>][&race=<race-id>][&page=<page>]
+be.iepscf.refuge.business.servlet.AnimalsServlet
+    doGet       résultat de recherche d'animaux 
+                - en GET parce que : permet de créer un lien depuis fiche d'un animal avec son espèce et sa race, etc.
+                - formulaire de modification de sa recherche (method=get, action=/animals)
+                - pas de critère : tri selon "id" DESC
+                - si le temps : prévoir pagination (d'où [&page=<page>] )
+                - pour employés : afficher lien vers page édition animal (/gestion/animal?id=<id>)
+                jsp : /animals.jsp
+                
+/animal?id<animal-id>
+be.iepscf.refuge.business.servlet.AnimalServlet
+    doGet       fiche animal + caractéristiques
+                - affichage espèce et race avec lien vers recherche correspondante (/animals?species=<species-id> et /animals?race=<race-id>)
+                - lien vers formulaire de demande de contact (/contactrequest?id=<animal-id>)
+                jsp : /animal.jsp
+
+/races?id=<species-id>
+be.iepscf.refuge.business.servlet.RacesServlet
+    doGest      liste des races de l'espèce en JSON pour remplir un select "race" dans le formulaire de recherche quand le select "species" est modifié
+
+
+Demande de contact :
+---------------------
+
+/contactrequest?id=<animal-id>
+be.iepscf.refuge.business.servlet.ContactRequestServlet
+    doGet       formulaire de la demande de contact
+                jsp : /contactrequest.jsp
+    doPost      enregistrement de la demande de contact
+                (?) retour à (fiche animal | accueil) ou message de remerciement
+                (?) jsp : /contactrequest-confirmation.jsp (si option affichage message de remerciement)
+
+
+(Dé)Connection :
+----------------
+
+/login
+be.iepscf.refuge.business.servlet.LoginServlet
+    doGet       formulaire de connection
+                jsp : /login.jsp
+    doPost      connection, création session
+                redirection accueil gestion (/gestion/) si succès
+
+/logout
+be.iepscf.refuge.business.servlet.LogoutServlet
+    doGet       formulaire confirmation déconnection
+                jsp : /logout.jsp
+    doPost      déconnection/nettoyage session, 
+                redirection accueil (/)
+
+
+Photo animal : 
+--------------
+
+/photo?id=<animal-id>
+be.iepscf.refuge.business.servlet.PhotoServlet
+    doGet       afficher photo animal
+
+
+Pages :
+-------
+
+/contact
+be.iepscf.refuge.business.servlet.PageContactServlet
+    doGet
+                jsp : /contact.jsp
+
+/infos
+be.iepscf.refuge.business.servlet.PageInfosServlet
+    doGet
+                jsp : /infos.jsp
+
+
+
+Partie employés / gestion :
+===========================
+
+/gestion/
+    be.iepscf.refuge.business.servlet.gestion.IndexServlet
+    doGet :     page d'accueil des employés du site
+                - lien vers ajouter animal
+                - liens vers gestion demandesz contact (/gestion/contactrequests)
+                - liens vers gestion users (/gestion/users/)
+                jsp : /gestion/index.jsp
+
+
+Gestion utilisateurs :
+----------------------
+                
+/gestion/users/
+    be.iepscf.refuge.business.servlet.gestion.UsersServlet
+    doGet       liste des utilisateurs
+                (?) affichage séparé des activés/désactivés (le tri peut ne se faire que dans la couche métier pour ne pas ajouter une requête à écrire)
+                jsp : /gestion/users.jsp
+
+/gestion/user?id=<user-id>
+    be.iepscf.refuge.business.servlet.gestion.UserServlet
+    doGet       formulaire édition d'un user
+                - bouton pour activer/désactiver (selon état actuel du user) (=> requète POST /gestion/user-deactivate?id= ou /gestion/user-activate?id=)
+                jsp : /gestion/users.jsp
+    doGet       update du user
+                (?) retour liste /gestion/users ou /gestion/user?id
+
+/gestion/useradd
+    be.iepscf.refuge.business.servlet.gestion.UserAddServlet
+    doGet       formulaire ajout user
+                jsp : /gestion/useradd.jsp
+    doPost      insertion new user
+    
+/gestion/user-deactivate
+    be.iepscf.refuge.business.servlet.gestion.UserActivateServlet
+    doPost      desactivation user
+                (?) retour liste users ou fiche user, ou page de message de confirmation
+        
+/gestion/user-activate
+    be.iepscf.refuge.business.servlet.gestion.UserActivateServlet
+    doPost      réactivation user
+                (?) retour liste users ou fiche user, ou page de message de confirmation
+
+ 
+Gestion animaux :
+-----------------
+        
+/gestion/animals (?)
+    be.iepscf.refuge.business.servlet.gestion.AnimalsServlet
+    doGet       liste animaux
+                - liens vers /gestion/animal?id=<id>
+                (?) nécessaire ? 
+                (?) présent sur la photo de la liste établie en classe, mais doublon de /animals
+                jsp : /gestion/animals.jsp
+
+/gestion/animal?id=<id>
+    be.iepscf.refuge.business.servlet.gestion.AnimalServlet
+    doGet       fiche d'édition d'un animal
+                jsp : /gestion/animal.jsp
+    doPost      enregistrement des modifications
+                message de confirmation
+                jsp : /gestion/animal-.jsp
+                retour fiche animl, ou liste animaux, ou message confirmation
+
+/gestion/animaladd
+    be.iepscf.refuge.business.servlet.gestion.AnimalAddServlet
+    doGet       formulaire d'ajout
+                jsp : /gestion/animaladd.jsp
+    doPost      ajout animal
+    
+/gestion/contactrequests
+    be.iepscf.refuge.business.servlet.gestion.ContactRequestsServlet
+    doGet       liste des demandes de contact
+                - lien pour chaque demande vers /gestion/contactrequest?id=<contactrequest-id>
+                - faire en sorte qu'on voit si plusieurs demandes pour un animal
+                jsp : /gestion/contactrequests.jsp
+
+/gestion/contactrequest?id=<contactrequest-id>
+    be.iepscf.refuge.business.servlet.gestion.ContactRequestServlet
+    doGet       afficher la demande
+                - afficher lien vers fiche animal (/animal?id et/ou vers /gestion/animal?id=<id>)
+                - faire en sorte qu'on voit si plusieurs demandes pour un animal
+                jsp : /gestion/contactrequest.jsp
+    doPost      marquer la demande comme traitée
+
+
+
+
+API Rest (couche persistence :
+==============================
+
+
+Resource User :
+---------------
+
+/rest/users
+    GET         liste users 
+                (?) actifs et inactifs ? les séparer à l'affichage dans la couche business ?
+    POST        insert user
+/rest/users/<id>
+    GET         get user #id
+    PUT         update user #id 
+                (full update, y compris pour activer/désactiver, par simplicité)
+    DELETE      delete user #id 
+                (déjà fait pour tester, mais inutile, puisqu'on n'efface pas, on désactive)
+
+
+
+Resource Animal :
+----------------
+
+/rest/animals[?species=<species-id>][&race=<race-id>]
+    GET         liste animaux ("ADOPTABLES" ?)
+    POST        ajout animal
+/rest/animals/<id>
+    GET         get animal #id
+    PUT         update animal #id
+                (full update, y compris pour désadopatibiliser (sic), par simplicité)
+/rest/animal/<id>/photo
+    GET         photo animal #id
+/rest/animal/<id>/contact-requests
+    GET         contactRequest pour l'animal #id
+
+
+Resource ContactRequest :
+-------------------------
+
+/rest/contact-requests
+    GET         "UNTREATED" ContactRequests
+    POST        ajout nouveau ContactRequest
+/rest/contact-requests/<id>
+    GET         get...
+    PUT         update...
+                (full update, même si seulement utilisé pour marquer "treated")
+
+Autres : 
+--------
+
+/rests/species
+    GET         liste des espèces pour remplir les select (html)
+/rests/species/<id>
+    GET         l'objet espèce pour remplir les objets Animal à la création
+/rests/species/<id>/races
+    GET         liste des races de l'espèce pour remplir les select (html)
+/rests/races/<id>
+    GET         l'objet race pour remplir les objets Animal à la création
+/rests/colors
+    GET         liste des couleurs pour remplir les select (html)
+/rest/roles
+    GET         liste des roles (ok, ok) pour remplir les select (html)
+/rest/roles/<id>
+    GET         l'objet role pour remplir les objets User à la création
+
+
