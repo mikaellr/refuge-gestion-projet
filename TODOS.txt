@@ -1,5 +1,5 @@
-/ à la bases des urls = http://localhost:8080/refuge/
-/ à la bases des jsps = refuge/src/main/webapp/WEB_INF/jsp/
+/ à la base des urls = http://localhost:8080/refuge/
+/ à la base des jsps = refuge/src/main/webapp/WEB_INF/jsp/
 
 Remarques : 
 - (?) à fixer 
@@ -247,6 +247,8 @@ Autres :
     GET         l'objet race pour remplir les objets Animal à la création
 /rests/colors
     GET         liste des couleurs pour remplir les select (html)
+/rests/colors/<id>
+    GET         l'objet color pour remplir les objets Animal à la création
 /rest/roles
     GET         liste des roles (ok, ok) pour remplir les select (html)
 /rest/roles/<id>
