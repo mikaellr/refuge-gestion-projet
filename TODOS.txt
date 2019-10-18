@@ -210,7 +210,7 @@ Resource User :
 Resource Animal :
 ----------------
 
-/rest/animals[?species=<species-id>][&race=<race-id>]
+/rest/animals[?species=<species-id>][&race=<race-id>][&offset=<offset>][&limit=<limit>[&last=true]
     GET         liste animaux ("ADOPTABLES" ?)
     POST        ajout animal
 /rest/animals/<id>
