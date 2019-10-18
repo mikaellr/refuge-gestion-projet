@@ -210,8 +210,16 @@ Resource User :
 Resource Animal :
 ----------------
 
-/rest/animals[?species=<species-id>][&race=<race-id>][&offset=<offset>][&limit=<limit>[&last=true][&adoptable=false][&all=true]
-    GET         liste animaux ("ADOPTABLES" ?)
+/rest/animals[?species=<species-id>][&race=<race-id>][&offset=<offset>][&limit=<limit>[&last=false][&adoptable=false][&all=true]
+    GET         liste animaux
+                valeurs par défaut (si paramètre non présent dans la requête) :
+                - default species = null (tous les animaux)
+                - default race = null (tous les animaux de l'espèce)
+                - default offset = 0
+                - default limit = 20
+                - default last = true (les derniers animaux en premiers, triés sur l'id car on n'a rien d'autre...)
+                - defaut adoptable = true 
+                - default all = false (si all = true : ignorer offset et limit, et renvoyer tous les enregistrements correspondants)
     POST        ajout animal
 /rest/animals/<id>
     GET         get animal #id
