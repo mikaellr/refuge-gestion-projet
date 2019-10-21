@@ -11,13 +11,14 @@ Remarques :
 
 Partie publique / visiteurs :
 =============================
-
+~~
 / 
 be.iepscf.refuge.business.servlet.IndexServlet
     doGet       page d'accueil
                 - formulaire de recherche d'animaux (method=get, action=/animals)
                 - Javascript (Ajax, fetch ES6) : event listener dans formulaire de recherche : détecter changement dans bouton select de l'espèce, charger les races en réaction)
                 jsp : /index.jsp
+~~
 
 
 Recherche et visualisation animaux :
@@ -48,18 +49,18 @@ be.iepscf.refuge.business.servlet.RacesServlet
 Demande de contact :
 ---------------------
 
-/contact-request?id=<animal-id>
+~~/contact-request?id=<animal-id>
 be.iepscf.refuge.business.servlet.ContactRequestServlet
     doGet       formulaire de la demande de contact
                 jsp : /contact-request.jsp
     doPost      enregistrement de la demande de contact
                 (?) retour à (fiche animal | accueil) ou message de remerciement
                 (?) jsp : /contact-request-confirmation.jsp (si option affichage message de remerciement)
-
+~~
 
 (Dé)Connection :
 ----------------
-
+~~
 /login
 be.iepscf.refuge.business.servlet.LoginServlet
     doGet       formulaire de connection
@@ -73,7 +74,7 @@ be.iepscf.refuge.business.servlet.LogoutServlet
                 jsp : /logout.jsp
     doPost      déconnection/nettoyage session, 
                 redirection accueil (/)
-
+~~
 
 Photo animal : 
 --------------
