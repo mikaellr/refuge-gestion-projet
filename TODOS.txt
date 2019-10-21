@@ -11,13 +11,6 @@ Remarques :
 
 Partie publique / visiteurs :
 =============================
-~~/ 
-be.iepscf.refuge.business.servlet.IndexServlet
-    doGet       page d'accueil
-                - formulaire de recherche d'animaux (method=get, action=/animals)
-                - Javascript (Ajax, fetch ES6) : event listener dans formulaire de recherche : détecter changement dans bouton select de l'espèce, charger les races en réaction)
-                jsp : /index.jsp~~
-
 
 Recherche et visualisation animaux :
 ------------------------------------
@@ -25,77 +18,8 @@ Recherche et visualisation animaux :
 /animals?[species=<species-id>][&race=<race-id>][&page=<page>]
 be.iepscf.refuge.business.servlet.AnimalsServlet
     doGet       résultat de recherche d'animaux 
-                - en GET parce que : permet de créer un lien depuis fiche d'un animal avec son espèce et sa race, etc.
-                - formulaire de modification de sa recherche (method=get, action=/animals)
-                - pas de critère : tri selon "id" DESC
-                - si le temps : prévoir pagination (d'où [&page=<page>] )
-                - pour employés : afficher lien vers page édition animal (/gestion/animal?id=<id>)
-                jsp : /animals.jsp
-                
-/animal?id<animal-id>
-be.iepscf.refuge.business.servlet.AnimalServlet
-    doGet       fiche animal + caractéristiques
-                - affichage espèce et race avec lien vers recherche correspondante (/animals?species=<species-id> et /animals?race=<race-id>)
-                - lien vers formulaire de demande de contact (/contact-request?id=<animal-id>)
-                jsp : /animal.jsp
-
-/races?id=<species-id>
-be.iepscf.refuge.business.servlet.RacesServlet
-    doGest      liste des races de l'espèce en JSON pour remplir un select "race" dans le formulaire de recherche quand le select "species" est modifié
-
-
-Demande de contact :
----------------------
-
-~~/contact-request?id=<animal-id>
-be.iepscf.refuge.business.servlet.ContactRequestServlet
-    doGet       formulaire de la demande de contact
-                jsp : /contact-request.jsp
-    doPost      enregistrement de la demande de contact
-                (?) retour à (fiche animal | accueil) ou message de remerciement
-                (?) jsp : /contact-request-confirmation.jsp (si option affichage message de remerciement)
-~~
-
-(Dé)Connection :
-----------------
-~~
-/login
-be.iepscf.refuge.business.servlet.LoginServlet
-    doGet       formulaire de connection
-                jsp : /login.jsp
-    doPost      connection, création session
-                redirection accueil gestion (/gestion/) si succès
-
-/logout
-be.iepscf.refuge.business.servlet.LogoutServlet
-    doGet       formulaire confirmation déconnection
-                jsp : /logout.jsp
-    doPost      déconnection/nettoyage session, 
-                redirection accueil (/)
-~~
-
-Photo animal : 
---------------
-
-/photo?id=<animal-id>
-be.iepscf.refuge.business.servlet.PhotoServlet
-    doGet       afficher photo animal
-
-
-Pages :
--------
-
-/contact
-be.iepscf.refuge.business.servlet.PageContactServlet
-    doGet
-                jsp : /contact.jsp
-
-/infos
-be.iepscf.refuge.business.servlet.PageInfosServlet
-    doGet
-                jsp : /infos.jsp
-
-
+                - si le temps : prévoir pagination (d'où [&page=<page>] ) !!!!!!!!!!!!!!!
+                (connaîtres nombre enregistrement si lien "dernière page" : méthode DAO nécessaire)
 
 Partie employés / gestion :
 ===========================
@@ -118,31 +42,7 @@ Gestion utilisateurs :
                 (?) affichage séparé des activés/désactivés (le tri peut ne se faire que dans la couche métier pour ne pas ajouter une requête à écrire)
                 jsp : /gestion/users.jsp
 
-/gestion/user?id=<user-id>
-    be.iepscf.refuge.business.servlet.gestion.UserServlet
-    doGet       formulaire édition d'un user
-                - bouton pour activer/désactiver (selon état actuel du user) (=> requète POST /gestion/user-deactivate?id= ou /gestion/user-activate?id=)
-                jsp : /gestion/users.jsp
-    doGet       update du user
-                (?) retour liste /gestion/users ou /gestion/user?id
 
-/gestion/user-add
-    be.iepscf.refuge.business.servlet.gestion.UserAddServlet
-    doGet       formulaire ajout user
-                jsp : /gestion/user-add.jsp
-    doPost      insertion new user
-    
-/gestion/user-deactivate
-    be.iepscf.refuge.business.servlet.gestion.UserActivateServlet
-    doPost      desactivation user
-                (?) retour liste users ou fiche user, ou page de message de confirmation
-        
-/gestion/user-activate
-    be.iepscf.refuge.business.servlet.gestion.UserActivateServlet
-    doPost      réactivation user
-                (?) retour liste users ou fiche user, ou page de message de confirmation
-
- 
 Gestion animaux :
 -----------------
         
@@ -167,7 +67,10 @@ Gestion animaux :
     doGet       formulaire d'ajout
                 jsp : /gestion/animal-add.jsp
     doPost      ajout animal
-    
+
+Gestion contact requests :
+--------------------------
+
 /gestion/contact-requests
     be.iepscf.refuge.business.servlet.gestion.ContactRequestsServlet
     doGet       liste des demandes de contact
